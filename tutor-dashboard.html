@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-level=1.0">
+    <title>Tutor Dashboard | EduTuition Agency</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Bootstrap & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/rtl.css">
+    <style>
+        :root {
+            --sidebar-width: 280px;
+        }
+
+        .dashboard-wrapper {
+            display: flex;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background: #ffffff;
+            border-right: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 40px 20px;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        [data-theme="dark"] .sidebar {
+            background: #1e293b;
+            border-right-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .main-content {
+            flex-grow: 1;
+            margin-left: var(--sidebar-width);
+            background: var(--bg-main);
+            min-height: 100vh;
+            padding: 0 40px 40px 40px;
+            max-width: calc(100% - var(--sidebar-width));
+        }
+
+        .dashboard-topbar {
+            position: fixed;
+            top: 0;
+            left: var(--sidebar-width);
+            right: 0;
+            z-index: 990;
+            background-color: var(--bg-main) !important;
+            backdrop-filter: blur(10px);
+            padding: 15px 40px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: background-color var(--transition);
+        }
+
+        [dir="rtl"] .dashboard-topbar {
+            left: 0 !important;
+            right: var(--sidebar-width) !important;
+        }
+
+        @media (max-width: 991.98px) {
+            .dashboard-topbar {
+                left: 0 !important;
+                right: 0 !important;
+                padding: 15px 20px;
+            }
+            [dir="rtl"] .dashboard-topbar {
+                left: 0 !important;
+                right: 0 !important;
+            }
+            .main-content {
+                padding: 0 20px 20px 20px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .dashboard-topbar h1 {
+                font-size: 1.6rem !important;
+                font-weight: 700 !important;
+            }
+        }
+
+        [data-theme="dark"] .dashboard-topbar {
+            background-color: #0f172a !important;
+            border-bottom-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .sidebar-nav .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 5px;
+            color: var(--gray-color) !important;
+            transition: var(--transition);
+            text-decoration: none !important;
+        }
+
+        .sidebar-nav .nav-link:hover,
+        .sidebar-nav .nav-link.active {
+            background-color: var(--primary);
+            color: white !important;
+            text-decoration: none !important;
+        }
+
+        .sidebar-nav .nav-link::after {
+            display: none;
+        }
+
+        .dashboard-section {
+            display: none;
+            width: 100%;
+            padding-top: 95px;
+        }
+
+        @media (max-width: 991.98px) {
+            .dashboard-section {
+                padding-top: 85px;
+            }
+        }
+
+        .dashboard-section.active {
+            display: block;
+        }
+
+        /* Mobile Sidebar Backdrop */
+        .sidebar-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
+            z-index: 999;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .sidebar-backdrop.show {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Mobile Sidebar */
+        @media (max-width: 991.98px) {
+            .sidebar {
+                transform: translateX(-100%);
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+                max-width: 100%;
+                width: 100%;
+            }
+        }
+
+        .stats-card {
+            background: var(--background);
+            color: var(--text);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            border: none;
+            width: 100%;
+        }
+
+        .chart-container {
+            height: 350px;
+            width: 100%;
+            position: relative;
+        }
+
+        /* Message UI */
+        .chat-bubble {
+            max-width: 80%;
+            padding: 15px 20px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
+
+        .chat-bubble.sent {
+            background: var(--primary);
+            color: white;
+            align-self: flex-end;
+        }
+
+        .chat-bubble.received {
+            background: #E8E2F2;
+            color: var(--text);
+            align-self: flex-start;
+        }
+
+        [data-theme="dark"] .chat-bubble.received {
+            background: #2D3436;
+            color: white;
+        }
+
+        body {
+            background-color: var(--bg-main) !important;
+            color: var(--text-dark) !important;
+            overflow-x: clip;
+        }
+
+        .bg-light {
+            background-color: #ffffff !important;
+        }
+
+        [data-theme="dark"] .bg-light {
+            background-color: transparent !important;
+        }
+
+        /* Stats card visibility in light mode */
+        .stats-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 12px !important;
+            padding: 1.25rem !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+        }
+
+        [data-theme="dark"] .stats-card {
+            background-color: #1e293b !important;
+            border-color: rgba(255,255,255,0.08) !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        /* Topbar icon buttons */
+        .topbar-icon-btn {
+            width: 40px !important;
+            height: 40px !important;
+            border-radius: 50% !important;
+            background-color: #1e293b !important;
+            border: none !important;
+            color: #fff !important;
+            font-size: 1.1rem !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3) !important;
+            transition: all 0.3s !important;
+        }
+        .topbar-icon-btn:hover {
+            background-color: var(--primary) !important;
+            transform: translateY(-2px) !important;
+        }
+        [data-theme="dark"] .topbar-icon-btn {
+            background-color: rgba(255,255,255,0.12) !important;
+            color: #ffffff !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.4) !important;
+        }
+        [data-theme="dark"] .topbar-icon-btn:hover {
+            background-color: var(--primary) !important;
+        }
+
+        .text-gray {
+            color: var(--gray-color) !important;
+        }
+
+        .border-light {
+            border-color: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        [data-theme="light"] .border-light {
+            border-color: rgba(0, 0, 0, 0.05) !important;
+        }
+
+        .text-primary {
+            color: var(--primary) !important;
+        }
+
+        .bg-primary {
+            background-color: var(--primary) !important;
+        }
+
+        .btn-primary {
+            background-color: var(--primary) !important;
+            border-color: var(--primary) !important;
+        }
+
+        /* Table Theme Fixes */
+        .table {
+            color: inherit !important;
+            background-color: transparent !important;
+        }
+
+        .table thead th {
+            border-bottom: 1px solid rgba(128, 128, 128, 0.2) !important;
+            color: var(--gray-color) !important;
+            background: transparent !important;
+        }
+
+        .table tbody td {
+            border-bottom: 1px solid rgba(128, 128, 128, 0.1) !important;
+            background: transparent !important;
+            color: inherit !important;
+        }
+
+        [data-theme="dark"] .stats-card,
+        [data-theme="dark"] .card,
+        [data-theme="dark"] div.bg-white,
+        [data-theme="dark"] div.bg-light {
+            background-color: #222222 !important;
+            color: #F0F9FF !important;
+        }
+
+        [data-theme="dark"] .table {
+            color: #F0F9FF !important;
+        }
+
+        [data-theme="dark"] .text-gray {
+            color: #B2BEC3 !important;
+        }
+
+        [data-theme="dark"] .text-dark {
+            color: #FFFFFF !important;
+        }
+
+        [data-theme="dark"] .bg-light-subtle {
+            background-color: #1A1A1A !important;
+        }
+
+        /* Message UI Dark Mode */
+        [data-theme="dark"] .chat-bubble.received {
+            background: #2D3436 !important;
+            color: #FFFFFF !important;
+        }
+
+        [data-theme="dark"] .chat-bubble.sent {
+            background: var(--primary) !important;
+        }
+
+        [data-theme="dark"] .form-control {
+            background-color: #2D3436 !important;
+            color: white !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        [data-theme="dark"] .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.4) !important;
+        }
+
+        /* Sidebar Fix */
+        [data-theme="dark"] .sidebar {
+            background: #1A1A1A !important;
+        }
+
+        [data-theme="dark"] .nav-link {
+            color: #B2BEC3 !important;
+            text-decoration: none !important;
+        }
+
+        [data-theme="dark"] .nav-link.active {
+            background: var(--primary) !important;
+            color: white !important;
+            text-decoration: none !important;
+        }
+
+        /* Theme Toggle & Hamburger Refinement */
+        #theme-toggle {
+            background: rgba(0, 0, 0, 0.05);
+            border: none;
+            transition: var(--transition);
+        }
+
+        #rtl-toggle {
+            background: var(--accent);
+            color: white;
+            border: none;
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] #theme-toggle {
+            background: rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        }
+
+        [data-theme="dark"] #rtl-toggle {
+            background: var(--accent) !important;
+            color: white !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        }
+
+        #theme-toggle:hover {
+            background: var(--primary) !important;
+            color: white !important;
+        }
+
+        #rtl-toggle:hover {
+            background: #b8a6d2 !important;
+            color: white !important;
+        }
+
+        [data-theme="dark"] .sidebar-toggle i {
+            color: var(--primary) !important;
+        }
+
+        /* Modal & Form Select Dark Mode */
+        [data-theme="dark"] .modal-content {
+            background-color: #222222 !important;
+            color: #F0F9FF !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+        }
+        [data-theme="dark"] .modal-header,
+        [data-theme="dark"] .modal-footer {
+            border-color: rgba(255, 255, 255, 0.1) !important;
+        }
+        [data-theme="dark"] .form-select {
+            background-color: #2D3436 !important;
+            color: white !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+        }
+        [data-theme="dark"] .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+    <!-- Mobile Sidebar Backdrop -->
+    <div class="sidebar-backdrop"></div>
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar shadow-sm">
+            <div class="sidebar-header mb-5 px-3">
+                <a href="index.html" class="logo m-0" style="text-decoration: none;">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>EduTuition</span>
+                </a>
+                <button class="btn d-lg-none sidebar-toggle p-0 border-0 position-absolute end-0 top-0 mt-3 me-3" aria-label="Close Sidebar"><i
+                        class="bi bi-x fs-1 text-primary"></i></button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#overview" class="nav-link active"><i class="bi bi-grid-3x3-gap-fill"></i> Dashboard</a>
+                <a href="#logs" class="nav-link"><i class="bi bi-person-lines-fill"></i> My Students</a>
+                <a href="#plans" class="nav-link"><i class="bi bi-pencil-square"></i> Session Logs</a>
+                <a href="#earnings" class="nav-link"><i class="bi bi-wallet2"></i> Earnings</a>
+                <a href="#messages" class="nav-link"><i class="bi bi-chat-heart-fill"></i> Messages <span
+                        class="badge rounded-pill bg-danger ms-auto">3</span></a>
+                <hr class="my-4 opacity-5">
+
+                <a href="index.html" class="nav-link mt-5"><i class="bi bi-box-arrow-left"></i> Logout</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Fixed Sticky Topbar -->
+            <div class="dashboard-topbar d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center gap-2">
+                    <button class="btn btn-white shadow-sm sidebar-toggle d-lg-none" aria-label="Toggle Sidebar" style="width:38px;height:38px;padding:0;"><i
+                            class="bi bi-list fs-5"></i></button>
+                    <h1 class="h6 fw-bold mb-0">Tutor Dashboard</h1>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <div id="theme-toggle" class="topbar-icon-btn theme-toggle" title="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <div id="rtl-toggle" class="topbar-icon-btn rtl-toggle" title="Toggle RTL">
+                        <i class="bi bi-arrow-left-right"></i>
+                    </div>
+
+                    <!-- Profile Dropdown -->
+                    <div class="dropdown ms-1">
+                        <button class="btn btn-light rounded-circle p-0 d-flex align-items-center justify-content-center overflow-hidden border shadow-sm"
+                            type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false"
+                            style="width: 40px; height: 40px;" title="User Profile">
+                            <img src="assets/images/img10.png"
+                                alt="Dr. Alan Smith" style="width: 100%; height: 100%; object-fit: cover;">
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-4 mt-2 p-2" aria-labelledby="profileDropdown" style="min-width: 220px;">
+                            <li class="px-3 py-2 border-bottom mb-1">
+                                <span class="d-block fw-bold text-dark mb-0">Dr. Alan Smith</span>
+                                <small class="text-gray">Tutor (Math)</small>
+                            </li>
+                            <li><a class="dropdown-item rounded-3 py-2" href="#overview"><i class="bi bi-person me-2 text-primary"></i> Profile Settings</a></li>
+                            <li><a class="dropdown-item rounded-3 py-2" href="#overview"><i class="bi bi-gear me-2 text-primary"></i> Account Preferences</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item rounded-3 py-2 text-danger" href="index.html"><i class="bi bi-box-arrow-right me-2"></i> Log Out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Overview -->
+            <section id="overview" class="dashboard-section active animate-on-scroll">
+                <div class="d-flex justify-content-between align-items-center mb-5 gap-3">
+                    <div>
+                        <h2 class="h3 fw-bold mb-1">Welcome, Dr. Alan</h2>
+                        <p class="text-gray mb-0 small">Manage your classes, submit logs, and track earnings.</p>
+                    </div>
+                    <button class="btn btn-primary btn-new-log rounded-pill shadow-sm btn-sm px-3 text-nowrap"
+                        data-bs-toggle="modal" data-bs-target="#newAssignmentModal" title="Log Session">
+                        <i class="bi bi-pencil-square small"></i>
+                        <span class="ms-1" style="font-size: 0.85rem;">Log Session</span>
+                    </button>
+                </div>
+
+                <div class="row g-4 mb-5">
+                    <div class="col-md-3">
+                        <div class="stats-card h-100 text-center">
+                            <span class="text-primary small d-block mb-2 text-uppercase fw-bold">Classes Today</span>
+                            <h3 class="fw-bold mb-1"><span id="activeSessionsCount">3</span> <small class="fw-normal text-gray fs-6">scheduled</small></h3>
+                            <p class="small text-success mb-0"><i class="bi bi-calendar-day"></i> Next at 4:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stats-card h-100 text-center">
+                            <span class="text-primary small d-block mb-2 text-uppercase fw-bold">Pending Logs</span>
+                            <h3 class="fw-bold mb-1"><span id="pendingAssignmentsCount">1</span> <small class="fw-normal text-gray fs-6">session</small></h3>
+                            <p class="small text-danger mb-0">Needs feedback</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stats-card h-100 text-center">
+                            <span class="text-primary small d-block mb-2 text-uppercase fw-bold">Your Rating</span>
+                            <h3 class="fw-bold mb-1">4.9 <small class="fw-normal text-gray fs-6">/ 5</small></h3>
+                            <p class="small text-success mb-0"><i class="bi bi-award"></i> Top Rated</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="stats-card h-100 text-center">
+                            <span class="text-primary small d-block mb-2 text-uppercase fw-bold">Monthly Earnings</span>
+                            <h3 class="fw-bold mb-1">$850 <small class="fw-normal text-gray fs-6">cleared</small></h3>
+                            <p class="small text-gray mb-0">Next payout on 15th</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhanced Session Completion Trends Card -->
+                <div class="stats-card mb-5 border-0 shadow-sm p-4 p-md-5">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3 pb-3 border-bottom border-light">
+                        <div>
+                            <div class="d-flex align-items-center gap-2 mb-1">
+                                <h5 class="fw-bold mb-0">Hours Logged & Performance</h5>
+                                <span class="badge bg-success-subtle text-success rounded-pill px-3 py-1"><i class="bi bi-graph-up-arrow me-1"></i> Consistent Growth</span>
+                            </div>
+                            <p class="text-gray mb-0 small">Track your logged hours and student feedback ratings this month.</p>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="btn-group btn-group-sm p-1 bg-light rounded-pill border border-light" role="group" id="chartFilterGroup">
+                                <button type="button" class="btn btn-primary rounded-pill px-3 active" data-range="week">Weekly</button>
+                                <button type="button" class="btn btn-outline-secondary border-0 rounded-pill px-3" data-range="month">Monthly</button>
+                                <button type="button" class="btn btn-outline-secondary border-0 rounded-pill px-3" data-range="quarter">Quarterly</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Metrics Legend Header -->
+                    <div class="row g-3 mb-4 text-center text-md-start">
+                        <div class="col-6 col-md-3">
+                            <div class="p-3 rounded-3 bg-light-subtle border border-light">
+                                <span class="text-gray small d-block mb-1"><i class="bi bi-circle-fill text-primary me-1 fs-6"></i> Completed</span>
+                                <h4 class="fw-bold mb-0" id="trendCompletedCount">66 <small class="fs-6 text-gray fw-normal">sessions</small></h4>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="p-3 rounded-3 bg-light-subtle border border-light">
+                                <span class="text-gray small d-block mb-1"><i class="bi bi-circle-fill text-info me-1 fs-6"></i> Scheduled</span>
+                                <h4 class="fw-bold mb-0" id="trendScheduledCount">72 <small class="fs-6 text-gray fw-normal">sessions</small></h4>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="p-3 rounded-3 bg-light-subtle border border-light">
+                                <span class="text-gray small d-block mb-1">Completion Rate</span>
+                                <h4 class="fw-bold text-success mb-0" id="trendCompletionRate">91.6%</h4>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="p-3 rounded-3 bg-light-subtle border border-light">
+                                <span class="text-gray small d-block mb-1">Peak Volume</span>
+                                <h4 class="fw-bold text-primary mb-0" id="trendPeakDay">Sat (14/day)</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-container" style="height: 380px;">
+                        <canvas id="sessionChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-8">
+                        <div class="stats-card border-0">
+                            <h5 class="fw-bold mb-4">Recent Feedback Received</h5>
+                            <div class="table-responsive">
+                                <table class="table table-borderless table-hover align-middle">
+                                    <thead class="bg-light">
+                                        <tr>
+                                            <th class="p-3 border-0 rounded-start">Date</th>
+                                            <th class="p-3 border-0">Tutor</th>
+                                            <th class="p-3 border-0">Student</th>
+                                            <th class="p-3 border-0 rounded-end">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="recentLogsTable">
+                                        <tr>
+                                            <td class="p-3 fw-medium">Mar 21, 2026</td>
+                                            <td class="p-3 text-gray">Alan Smith</td>
+                                            <td class="p-3 text-gray">John Doe</td>
+                                            <td class="p-3"><span class="badge bg-success-subtle text-success px-3">Completed</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 fw-medium">Mar 20, 2026</td>
+                                            <td class="p-3 text-gray">Sarah Jenkins</td>
+                                            <td class="p-3 text-gray">Emily R.</td>
+                                            <td class="p-3"><span
+                                                    class="badge bg-warning-subtle text-warning px-3">Pending Feedback</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="stats-card h-100 border-primary border-start border-4">
+                            <h5 class="fw-bold mb-3"><i class="bi bi-megaphone-fill text-primary me-2"></i>Agency Announcements</h5>
+                            <p class="text-gray mb-0">"Please ensure all session logs for the first half of the month are submitted by the 14th to avoid payout delays."</p>
+                            <div class="mt-4">
+                                <a href="#messages" class="btn btn-primary btn-sm rounded-pill">Contact Admin <i
+                                        class="bi bi-arrow-right ps-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Session Logs Section -->
+            <section id="logs" class="dashboard-section animate-on-scroll">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-5 gap-4">
+                    <div>
+                        <h2 class="h3 fw-bold mb-1">My Students Roster</h2>
+                        <p class="text-gray mb-0">Manage your currently assigned students and review their historical data.</p>
+                    </div>
+                    <div class="d-flex justify-content-center justify-content-md-end gap-2">
+                        <button id="btnFilterLogs" class="btn btn-outline btn-sm rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#filterLogsModal"><i class="bi bi-filter me-2"></i>
+                            Filter</button>
+                        <button id="btnExportCsv" class="btn btn-primary btn-sm rounded-pill px-4"><i class="bi bi-download me-2"></i>
+                            Export CSV</button>
+                    </div>
+                </div>
+
+                <!-- Log Summary Cards -->
+                <div class="row g-4 mb-5">
+                    <div class="col-6 col-md-3">
+                        <div class="stats-card p-3 text-center border-0 bg-primary-subtle bg-opacity-10">
+                            <span class="text-gray small d-block mb-1">Avg. Session Time</span>
+                            <span class="h5 fw-bold mb-0">1.5 hrs</span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stats-card p-3 text-center border-0 bg-success-subtle bg-opacity-10">
+                            <span class="text-gray small d-block mb-1">Total Sessions</span>
+                            <span class="h5 fw-bold mb-0" id="totalSessionsCount">124 mo</span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stats-card p-3 text-center border-0 bg-warning-subtle bg-opacity-10">
+                            <span class="text-gray small d-block mb-1">Cancellations</span>
+                            <span class="h5 fw-bold mb-0">2 avg</span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stats-card p-3 text-center border-0 bg-info-subtle bg-opacity-10">
+                            <span class="text-gray small d-block mb-1">Satisfaction Score</span>
+                            <span class="h5 fw-bold mb-0">98%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead>
+                                <tr>
+                                    <th class="border-0">Date</th>
+                                    <th class="border-0">Subject</th>
+                                    <th class="border-0">Tutor</th>
+                                    <th class="border-0">Duration</th>
+                                    <th class="border-0">Rating</th>
+                                    <th class="border-0">Feedback</th>
+                                </tr>
+                            </thead>
+                            <tbody id="detailedLogsTable" class="text-gray">
+                                <tr>
+                                    <td>Mar 21, 2026</td>
+                                    <td>Math</td>
+                                    <td>Alan Smith</td>
+                                    <td class="fw-bold text-dark">2.0h</td>
+                                    <td><span class="text-warning">★★★★★</span></td>
+                                    <td class="small">Excellent progress on Calculus.</td>
+                                </tr>
+                                <tr>
+                                    <td>Mar 20, 2026</td>
+                                    <td>Science</td>
+                                    <td>Sarah Jenkins</td>
+                                    <td class="fw-bold text-dark">1.5h</td>
+                                    <td><span class="text-warning">★★★★☆</span></td>
+                                    <td class="small">Needs more focus on Chemistry basics.</td>
+                                </tr>
+                                <tr>
+                                    <td>Mar 19, 2026</td>
+                                    <td>English</td>
+                                    <td>Michael Chang</td>
+                                    <td class="fw-bold text-dark">1.0h</td>
+                                    <td><span class="text-warning">★★★★★</span></td>
+                                    <td class="small">Great essay writing practice.</td>
+                                </tr>
+                                <tr>
+                                    <td>Mar 18, 2026</td>
+                                    <td>Spanish</td>
+                                    <td>Elena Rodriguez</td>
+                                    <td class="fw-bold text-dark">2.0h</td>
+                                    <td><span class="text-warning">★★★★☆</span></td>
+                                    <td class="small">Conversational skills improving.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Monthly Insights -->
+                <div class="row g-4 mt-4">
+                    <div class="col-lg-6">
+                        <div class="stats-card h-100 border-0 shadow-sm" style="background: rgba(108, 155, 207, 0.05);">
+                            <h6 class="fw-bold mb-3"><i class="bi bi-lightbulb-fill text-warning me-2"></i>Performance Insight
+                            </h6>
+                            <p class="small text-gray mb-0">Based on session logs, students matched with native speakers have shown a <strong>15% increase</strong> in satisfaction scores this week. Keep up the good matching!</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="stats-card h-100 border-0 shadow-sm" style="background: rgba(200, 182, 226, 0.05);">
+                            <h6 class="fw-bold mb-3"><i
+                                    class="bi bi-calendar-check-fill text-tertiary me-2"></i>Payment Alert</h6>
+                            <p class="small text-gray mb-0">8 invoices are currently pending. Automated reminders have been sent to parents. You might see a temporary delay in tutor payouts for these specific accounts.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Session Logs Section -->
+            <section id="plans" class="dashboard-section animate-on-scroll">
+                <h2 class="h3 fw-bold mb-5">Session Log Submissions</h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="stats-card border-0">
+                            <h5 class="fw-bold mb-3">Today's Schedule</h5>
+                            <ul id="todaysScheduleList" class="list-unstyled text-gray">
+                                <li class="mb-2"><i class="bi bi-check2-circle text-primary me-2"></i> 4:00 PM - John Doe (Math) - Dr. Alan Smith</li>
+                                <li class="mb-2"><i class="bi bi-check2-circle text-primary me-2"></i> 5:30 PM - Emily R. (Science) - Sarah Jenkins</li>
+                                <li class="mb-2"><i class="bi bi-check2-circle text-primary me-2"></i> 6:00 PM - Alex T. (English) - Michael Chang</li>
+                                <li class="mb-2"><i class="bi bi-check2-circle text-primary me-2"></i> 7:00 PM - Sofia M. (Spanish) - Elena Rodriguez</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="stats-card border-0">
+                            <h5 class="fw-bold mb-3">Assignment Completion Rate</h5>
+                            <p class="small text-gray mb-4">Focus on matching the remaining 12 pending students this week.
+                            </p>
+                            <label class="small text-gray d-block mb-2">Matching Progress</label>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar rounded-pill" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strategic Deep Dive -->
+                <div class="card p-4 p-md-5 border-0 shadow-sm rounded-4 bg-white mt-5">
+                    <div
+                        class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 mb-md-5 gap-3">
+                        <div>
+                            <div class="small text-primary fw-bold mb-2">CURRENT PHASE</div>
+                            <h3 class="mb-0 h4 h3-md">High Priority Matches</h3>
+                        </div>
+                        <button id="btnDownloadReport" class="btn btn-outline-primary rounded-pill btn-sm px-4 py-2"
+                            style="width: fit-content;"><i class="bi bi-download me-2"></i> Download Report</button>
+                    </div>
+
+                    <div class="row g-5">
+                        <div class="col-lg-7">
+                            <h5 class="fw-bold mb-4">Core Strategies</h5>
+                            <div class="mb-4">
+                                <div class="fw-bold mb-2">1. Match Requirements</div>
+                                <p class="text-gray">Ensure tutors have availability matching the parents' requested time slots and proper subject expertise.</p>
+                            </div>
+                            <div class="mb-4">
+                                <div class="fw-bold mb-2">2. Trial Sessions</div>
+                                <p class="text-gray">Offer a 30-minute trial session for new matches before confirming long-term commitments to ensure a good fit.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="bg-light p-4 rounded-4 text-center">
+                                <i class="bi bi-book fs-1 text-primary opacity-50 mb-3"></i>
+                                <h6>Operations Manual</h6>
+                                <p class="small text-gray">Access your full coordinator handbook anytime.</p>
+                                <button id="btnOpenLibrary" class="btn btn-primary w-100 rounded-pill" data-bs-toggle="modal" data-bs-target="#operationsManualModal">Open Library</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Earnings Section -->
+            <section id="earnings" class="dashboard-section animate-on-scroll">
+                <h2 class="h3 fw-bold mb-5">Earnings History</h2>
+                <div class="card border-0 shadow-sm rounded-4 mb-4">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="fw-bold mb-0">Recent Payouts</h5>
+                            <button class="btn btn-outline-primary rounded-pill px-4">Download CSV</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-borderless table-hover align-middle">
+                                <thead class="bg-light">
+                                    <tr>
+                                        <th class="p-3 border-0 rounded-start">Date</th>
+                                        <th class="p-3 border-0">Description</th>
+                                        <th class="p-3 border-0">Amount</th>
+                                        <th class="p-3 border-0 rounded-end">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="p-3">Oct 15, 2026</td>
+                                        <td class="p-3 text-gray">Oct 1-15 Bi-weekly</td>
+                                        <td class="p-3 fw-bold">$850.00</td>
+                                        <td class="p-3"><span class="badge bg-success-subtle text-success px-3">Cleared</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3">Sep 30, 2026</td>
+                                        <td class="p-3 text-gray">Sep 15-30 Bi-weekly</td>
+                                        <td class="p-3 fw-bold">$790.00</td>
+                                        <td class="p-3"><span class="badge bg-success-subtle text-success px-3">Cleared</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Messages Section -->
+            <section id="messages" class="dashboard-section animate-on-scroll">
+                <h2 class="h3 fw-bold mb-5">Chat with Coordinator</h2>
+                <div class="card p-0 border-0 shadow-lg rounded-5 bg-white overflow-hidden d-flex flex-column"
+                    style="height: 600px;">
+                    <div class="chat-header p-4 border-bottom bg-light d-flex align-items-center gap-3">
+                        <img src="assets/images/img8.png" alt="Sarah Coordinator" class="rounded-circle"
+                            style="width: 50px; height: 50px; object-fit: cover;">
+                        <div>
+                            <div class="fw-bold">Sarah Connor (Coordinator)</div>
+                            <div class="small text-success"><i class="bi bi-dot"></i> Online</div>
+                        </div>
+                    </div>
+                    <div id="chatBody" class="chat-body p-4 flex-grow-1 overflow-auto d-flex flex-column bg-light-subtle">
+                        <div class="chat-bubble received">
+                            Hello! How did yesterday's math session go with Leo? Did you match him with Dr. Smith?
+                            <div class="small mt-1 opacity-50">08:30 AM</div>
+                        </div>
+                        <div class="chat-bubble sent">
+                            Hi Emma! Yes, we did! Dr. Smith reported that Leo grasped the concepts much faster.
+                            <div class="small mt-1 opacity-50">09:15 AM</div>
+                        </div>
+                        <div class="chat-bubble received">
+                            That's wonderful! For next week, let's keep the same schedule.
+                            <div class="small mt-1 opacity-50">09:18 AM</div>
+                        </div>
+                    </div>
+                    <div class="chat-footer p-4 border-top">
+                        <form id="chatForm" class="d-flex gap-2">
+                            <input id="chatInput" type="text" class="form-control rounded-pill border-0 bg-light p-3"
+                                placeholder="Type your message..." required>
+                            <button type="submit" class="btn btn-primary rounded-circle p-0" style="width: 54px; height: 54px;" aria-label="Send Message"><i
+                                    class="bi bi-send-fill"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <!-- New Assignment Modal -->
+    <div class="modal fade" id="newAssignmentModal" tabindex="-1" aria-labelledby="newAssignmentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 shadow border-0">
+                <div class="modal-header border-bottom">
+                    <h5 class="modal-title fw-bold" id="newAssignmentModalLabel"><i class="bi bi-plus-circle-fill text-primary me-2"></i>Create New Assignment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="newAssignmentForm">
+                    <div class="modal-body p-4">
+                        <div class="mb-3">
+                            <label for="studentName" class="form-label fw-semibold">Student Name</label>
+                            <input type="text" class="form-control" id="studentName" placeholder="e.g. Alex Johnson" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tutorName" class="form-label fw-semibold">Assigned Tutor</label>
+                            <select class="form-select" id="tutorName" required>
+                                <option value="" selected disabled>Select Tutor...</option>
+                                <option value="Dr. Alan Smith">Dr. Alan Smith (Math)</option>
+                                <option value="Sarah Jenkins">Sarah Jenkins (Science)</option>
+                                <option value="Michael Chang">Michael Chang (English)</option>
+                                <option value="Elena Rodriguez">Elena Rodriguez (Spanish)</option>
+                            </select>
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="subjectSelect" class="form-label fw-semibold">Subject</label>
+                                <select class="form-select" id="subjectSelect" required>
+                                    <option value="Math">Mathematics</option>
+                                    <option value="Science">Science / Chemistry</option>
+                                    <option value="English">English Literature</option>
+                                    <option value="Spanish">Spanish Language</option>
+                                    <option value="Physics">Physics</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="sessionRate" class="form-label fw-semibold">Hourly Rate ($)</label>
+                                <input type="number" class="form-control" id="sessionRate" value="45" min="15" max="200" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sessionSchedule" class="form-label fw-semibold">Schedule / Time Slot</label>
+                            <input type="text" class="form-control" id="sessionSchedule" placeholder="e.g. Mon & Wed, 4:00 PM" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top">
+                        <button type="button" class="btn btn-outline rounded-pill px-4" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4">Save & Assign</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Logs Modal -->
+    <div class="modal fade" id="filterLogsModal" tabindex="-1" aria-labelledby="filterLogsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 shadow border-0">
+                <div class="modal-header border-bottom">
+                    <h5 class="modal-title fw-bold" id="filterLogsModalLabel"><i class="bi bi-filter me-2 text-primary"></i>Filter Session Logs</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="filterLogsForm">
+                    <div class="modal-body p-4">
+                        <div class="mb-3">
+                            <label for="filterSubject" class="form-label fw-semibold">Filter by Subject</label>
+                            <select class="form-select" id="filterSubject">
+                                <option value="all">All Subjects</option>
+                                <option value="Math">Math</option>
+                                <option value="Science">Science</option>
+                                <option value="English">English</option>
+                                <option value="Spanish">Spanish</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="filterStatus" class="form-label fw-semibold">Filter by Status</label>
+                            <select class="form-select" id="filterStatus">
+                                <option value="all">All Statuses</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Pending Feedback">Pending Feedback</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top">
+                        <button type="button" id="resetFilterBtn" class="btn btn-outline rounded-pill px-4">Reset</button>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4">Apply Filter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Operations Manual Modal -->
+    <div class="modal fade" id="operationsManualModal" tabindex="-1" aria-labelledby="operationsManualModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content rounded-4 shadow border-0">
+                <div class="modal-header border-bottom">
+                    <h5 class="modal-title fw-bold" id="operationsManualModalLabel"><i class="bi bi-book-fill text-primary me-2"></i>Coordinator Operations Handbook</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="alert alert-info border-0 rounded-3 mb-4">
+                        <i class="bi bi-info-circle-fill me-2"></i> Quick Reference Guide for Tuition Agency Coordinators
+                    </div>
+                    <h6 class="fw-bold text-primary mb-2">1. Matching Criteria</h6>
+                    <p class="text-gray small mb-3">Always verify tutor subject credentials, location proximity (< 10 miles for in-person), and parent preferred time slots before confirming an assignment.</p>
+                    <h6 class="fw-bold text-primary mb-2">2. Trial Session Policy</h6>
+                    <p class="text-gray small mb-3">All new matches receive a 30-minute trial session. Feedback must be collected within 24 hours of trial completion.</p>
+                    <h6 class="fw-bold text-primary mb-2">3. Billing & Invoicing Workflow</h6>
+                    <p class="text-gray small mb-0">Invoices are auto-generated on the 1st and 15th of each month. Late payments trigger reminder emails after 5 days.</p>
+                </div>
+                <div class="modal-footer border-top">
+                    <button type="button" class="btn btn-primary rounded-pill px-4" data-bs-dismiss="modal">Close Handbook</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100;"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+</body>
+
+</html>

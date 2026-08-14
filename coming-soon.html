@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-level=1.0">
+  <title>Coming Soon | Home Tuition Management Agency</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .coming-soon-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+    }
+    .coming-soon-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+    .coming-soon-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: -1;
+    }
+    .timer {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin: 3rem 0;
+    }
+    .timer-item {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      padding: 1.5rem;
+      border-radius: var(--radius-lg);
+      min-width: 100px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .timer-number {
+      font-size: 3rem;
+      font-weight: 600;
+      font-family: var(--font-heading);
+      line-height: 1;
+      color: var(--secondary);
+    }
+    .timer-label {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 0.5rem;
+    }
+    @media (max-width: 768px) {
+      .timer { gap: 1rem; }
+      .timer-item { min-width: 70px; padding: 1rem; }
+      .timer-number { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="coming-soon-page">
+    <img src="assets/images/img8.png" alt="Coming Soon" class="coming-soon-bg">
+    <div class="coming-soon-overlay"></div>
+    
+    <div class="container">
+      <div style="max-width: 800px; margin: 0 auto;">
+        <a href="index.html" class="logo" style="justify-content: center; color: #fff; margin-bottom: 2rem; font-size: 2rem;">
+          <i class="fas fa-tutor" style="color: var(--primary);"></i>
+          <span>EduTuition</span>
+        </a>
+        
+        <h1 class="hero-title" style="color: #fff;">Something Awesome Is Arriving</h1>
+        <p style="font-size: 1.25rem; color: #ccc;">We are working hard to bring you the best home tuition experience. Stay tuned!</p>
+        
+        <div class="timer">
+          <div class="timer-item">
+            <div class="timer-number">14</div>
+            <div class="timer-label">Days</div>
+          </div>
+          <div class="timer-item">
+            <div class="timer-number">08</div>
+            <div class="timer-label">Hours</div>
+          </div>
+          <div class="timer-item">
+            <div class="timer-number">45</div>
+            <div class="timer-label">Mins</div>
+          </div>
+          <div class="timer-item">
+            <div class="timer-number">30</div>
+            <div class="timer-label">Secs</div>
+          </div>
+        </div>
+        
+        <form style="max-width: 500px; margin: 0 auto; display: flex; gap: 1rem;">
+          <input type="email" class="form-control" placeholder="Enter your email to be notified" required style="background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.2);">
+          <button type="submit" class="btn btn-primary">Notify Me</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

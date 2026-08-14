@@ -1,0 +1,140 @@
+/* 
+  Lullaby Lark - RTL Support
+  Essential RTL functionality only
+*/
+
+/* Base RTL Direction */
+[dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+}
+
+[dir="rtl"] body {
+    text-align: right;
+}
+
+/* Essential Text Alignment Fixes */
+[dir="rtl"] .text-start { text-align: right !important; }
+[dir="rtl"] .text-end { text-align: left !important; }
+[dir="rtl"] .float-start { float: right !important; }
+[dir="rtl"] .float-end { float: left !important; }
+
+/* Essential Margin Fixes */
+[dir="rtl"] .ms-auto { margin-right: auto !important; margin-left: 0 !important; }
+[dir="rtl"] .me-auto { margin-left: auto !important; margin-right: 0 !important; }
+[dir="rtl"] .ms-1 { margin-right: 0.25rem !important; margin-left: 0 !important; }
+[dir="rtl"] .me-1 { margin-left: 0.25rem !important; margin-right: 0 !important; }
+[dir="rtl"] .ms-2 { margin-right: 0.5rem !important; margin-left: 0 !important; }
+[dir="rtl"] .me-2 { margin-left: 0.5rem !important; margin-right: 0 !important; }
+
+/* Navbar RTL */
+[dir="rtl"] .navbar-brand {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .navbar-brand i {
+    margin-left: 10px;
+    margin-right: 0;
+}
+
+[dir="rtl"] .dropdown-menu {
+    text-align: right;
+}
+
+/* Icon Mirroring for RTL */
+[dir="rtl"] .bi-arrow-right::before,
+[dir="rtl"] .bi-chevron-right::before,
+[dir="rtl"] .bi-arrow-left::before,
+[dir="rtl"] .bi-chevron-left::before {
+    display: inline-block;
+    transform: scaleX(-1);
+}
+
+/* =====================================================
+   RTL Navbar Action Buttons (Desktop ≥1200px)
+   Move RTL/Theme/Dashboard/Login buttons to LEFT side
+   ===================================================== */
+@media (min-width: 1200px) {
+
+    /* Without register button */
+    [dir="rtl"] .navbar .offcanvas-body .navbar-nav > .nav-item > .nav-link[href="login.html"] {
+        right: auto !important;
+        left: 0 !important;
+    }
+
+    [dir="rtl"] .navbar .offcanvas-body .navbar-nav > .nav-item > .nav-link[href="dashboard.html"] {
+        right: auto !important;
+        left: 86px !important;
+    }
+
+    [dir="rtl"] .navbar .offcanvas-body .navbar-nav > .nav-item > .nav-link#theme-toggle {
+        right: auto !important;
+        left: 148px !important;
+    }
+
+    [dir="rtl"] .navbar .offcanvas-body .navbar-nav > .nav-item > .nav-link#rtl-toggle {
+        right: auto !important;
+        left: 196px !important;
+    }
+
+    /* With register button */
+    [dir="rtl"] .navbar .offcanvas-body .navbar-nav:has(> .nav-item > .nav-link[href="register.html"]) > .nav-item > .nav-link[href="register.html"] {
+        right: auto !important;
+        left: 0 !important;
+    }
+
+    [dir="rtl"] .navbar .offcanvas-body .navbar-nav:has(> .nav-item > .nav-link[href="register.html"]) > .nav-item > .nav-link[href="login.html"] {
+        right: auto !important;
+        left: 86px !important;
+    }
+
+    [dir="rtl"] .navbar .offcanvas-body .navbar-nav:has(> .nav-item > .nav-link[href="register.html"]) > .nav-item > .nav-link[href="dashboard.html"] {
+        right: auto !important;
+        left: 172px !important;
+    }
+
+    [dir="rtl"] .navbar .offcanvas-body .navbar-nav:has(> .nav-item > .nav-link[href="register.html"]) > .nav-item > .nav-link#theme-toggle {
+        right: auto !important;
+        left: 234px !important;
+    }
+
+    [dir="rtl"] .navbar .offcanvas-body .navbar-nav:has(> .nav-item > .nav-link[href="register.html"]) > .nav-item > .nav-link#rtl-toggle {
+        right: auto !important;
+        left: 282px !important;
+    }
+}
+
+/* Dashboard RTL Layout */
+[dir="rtl"] .sidebar {
+    left: auto !important;
+    right: 0 !important;
+    border-right: none !important;
+    border-left: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-theme="dark"][dir="rtl"] .sidebar {
+    border-left-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+[dir="rtl"] .main-content {
+    margin-left: 0 !important;
+    margin-right: var(--sidebar-width) !important;
+}
+
+@media (max-width: 991.98px) {
+    [dir="rtl"] .sidebar {
+        transform: translateX(100%) !important;
+        right: 0 !important;
+        left: auto !important;
+    }
+
+    [dir="rtl"] .sidebar.active {
+        transform: translateX(0) !important;
+    }
+
+    [dir="rtl"] .main-content {
+        margin-right: 0 !important;
+    }
+}
+
+

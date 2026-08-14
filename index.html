@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-level=1.0">
+  <title>Home - Home Tuition Management Agency</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-graduation-cap"></i>
+        <span>EduTuition</span>
+      </a>
+      
+      <button class="mobile-toggle" aria-label="Toggle Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+
+            <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="home-2.html" class="nav-link">Home 2</a></li>
+        <li><a href="about.html" class="nav-link">About Tutors</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+        <li><a href="pricing.html" class="nav-link">Tuition Fees</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        
+        <li class="nav-actions">
+          <button class="theme-toggle" aria-label="Toggle Dark Mode">
+            <i class="fas fa-moon"></i>
+          </button>
+          <button class="rtl-toggle" aria-label="Toggle RTL">
+            <i class="fas fa-exchange-alt"></i>
+          </button>
+          <div class="nav-dropdown" style="position: relative; display: flex; align-items: center;">
+            <button class="cart-toggle dropdown-btn" aria-label="Portals">
+              <i class="fas fa-th-large"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="parent-dashboard.html"><i class="fas fa-user-graduate"></i> Parent Portal</a>
+              <a href="tutor-dashboard.html"><i class="fas fa-chalkboard-teacher"></i> Tutor Portal</a>
+              <a href="dashboard.html"><i class="fas fa-cog"></i> Coordinator Admin</a>
+            </div>
+          </div>
+          <a href="login.html" class="btn btn-primary">Login</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <img src="assets/images/img1.png" alt="Home Tuition Hero" class="hero-bg">
+    <div class="hero-overlay"></div>
+    
+    <!-- Brand Animation Elements -->
+    <div class="hero-sparkles">
+      <i class="fas fa-pencil-alt sparkle s1"></i>
+      <i class="fas fa-flask sparkle s2"></i>
+      <i class="fas fa-graduation-cap sparkle s3"></i>
+      <i class="fas fa-lightbulb sparkle s4"></i>
+      <i class="fas fa-book-open sparkle s5"></i>
+      <i class="fas fa-globe sparkle s6"></i>
+    </div>
+
+    <div class="container" style="display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; z-index: 1; position: relative;">
+      <div class="hero-content" style="text-align: left; max-width: 600px; flex: 1; min-width: 300px; margin: 0;">
+        <h1 class="hero-title">Find the Perfect Home Tutor</h1>
+        <p class="hero-desc">Connect with verified, expert tutors for personalized one-on-one home tuition. Your child's academic success starts here.</p>
+        <div class="hero-actions" style="justify-content: flex-start;">
+          <a href="services.html" class="btn btn-primary">Find a Tutor</a>
+          <a href="dashboard.html" class="btn btn-outline" style="color:#fff; border-color:#fff;">Coordinator Dashboard</a>
+        </div>
+      </div>
+      <div class="hero-image-extra" style="flex: 1; min-width: 300px; text-align: center;">
+        <img src="assets/images/img17.png" alt="Home Tuition graphic" style="max-width: 100%; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); animation: floatUpDown 4s ease-in-out infinite;">
+      </div>
+    </div>
+  </section>
+  <style>
+    @keyframes floatUpDown {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-25px); }
+      100% { transform: translateY(0); }
+    }
+  </style>
+
+  <!-- Section 1: Subjects -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Explore Subjects</h2>
+        <p class="section-subtitle">Find expert tutors across a wide range of academic subjects and levels.</p>
+      </div>
+      
+      <div class="grid-4">
+        <div class="card">
+          <div class="card-img-wrap">
+            <img src="assets/images/img28.png" alt="Mathematics" class="card-img">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Mathematics</h3>
+            <p class="card-text">Algebra, Calculus, Geometry, and more.</p>
+            <div class="card-footer" style="justify-content: center;">
+              <a href="services.html" class="btn btn-outline">View Tutors</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-img-wrap">
+            <img src="assets/images/img31.png" alt="Sciences" class="card-img">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Sciences</h3>
+            <p class="card-text">Physics, Chemistry, and Biology experts.</p>
+            <div class="card-footer" style="justify-content: center;">
+              <a href="services.html" class="btn btn-outline">View Tutors</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-img-wrap">
+            <img src="assets/images/img22.png" alt="Languages" class="card-img">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Languages</h3>
+            <p class="card-text">English, Spanish, French, and ESL.</p>
+            <div class="card-footer" style="justify-content: center;">
+              <a href="services.html" class="btn btn-outline">View Tutors</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-img-wrap">
+            <img src="assets/images/img26.png" alt="Test Prep" class="card-img">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Test Preparation</h3>
+            <p class="card-text">SAT, ACT, GRE, and GMAT specialists.</p>
+            <div class="card-footer" style="justify-content: center;">
+              <a href="services.html" class="btn btn-outline">View Tutors</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Premium Interactive Success Features -->
+  <section class="premium-section">
+    <div class="container premium-grid">
+      
+      <!-- Left Side Visuals -->
+      <div class="premium-images-wrapper">
+        <img src="assets/images/img17.png" alt="Students Learning" class="premium-image-main">
+      </div>
+
+      <!-- Right Side Content -->
+      <div class="premium-content-wrapper">
+        <span class="premium-subtitle">Elevating the Standard</span>
+        <h2 class="premium-title">Premium Home Tuition Experience</h2>
+        <p class="premium-desc">We move beyond traditional tutoring by integrating advanced learning analytics, elite educator vetting, and a seamlessly connected progress platform for absolute transparency.</p>
+        
+        <div class="premium-features-list">
+          <div class="premium-feature-item">
+            <div class="feature-item-icon">
+              <i class="fas fa-crown"></i>
+            </div>
+            <div class="feature-item-content">
+              <h3>Elite Tutor Network</h3>
+              <p>Only the top 5% of applicants pass our rigorous academic, background, and live-teaching evaluations.</p>
+            </div>
+          </div>
+
+          <div class="premium-feature-item">
+            <div class="feature-item-icon">
+              <i class="fas fa-brain"></i>
+            </div>
+            <div class="feature-item-content">
+              <h3>Personalized Matching</h3>
+              <p>Our intelligent system pairs students based on subject needs, learning styles, and personality profiles.</p>
+            </div>
+          </div>
+
+          <div class="premium-feature-item">
+            <div class="feature-item-icon">
+              <i class="fas fa-chart-pie"></i>
+            </div>
+            <div class="feature-item-content">
+              <h3>Transparent Tracking</h3>
+              <p>Parents have 24/7 access to session logs, weekly progress reports, and automated billing through the dashboard.</p>
+            </div>
+          </div>
+        </div>
+
+        <a href="services.html" class="premium-cta">
+          Find Your Perfect Match <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 3: How Our Platform Works -->
+  <section class="section">
+    <div class="container">
+      <div class="info-section">
+        <div class="info-content">
+          <h2 class="section-title">How Our Platform Works</h2>
+          <p style="margin-top:1.5rem; margin-bottom:1rem; color:var(--text-light);">Our platform seamlessly connects students with verified tutors while providing an internal dashboard for coordinators to manage everything smoothly.</p>
+          <ul style="margin-bottom: 2rem; color:var(--text-light); padding-left: 1.5rem; list-style-type: disc;">
+            <li style="margin-bottom: 0.5rem;">Public directory of verified, expert tutors.</li>
+            <li style="margin-bottom: 0.5rem;">Coordinator dashboard for tutor assignments.</li>
+            <li style="margin-bottom: 0.5rem;">Detailed session logs and feedback tracking.</li>
+            <li style="margin-bottom: 0.5rem;">Automated billing and tutor payouts.</li>
+          </ul>
+          <a href="dashboard.html" class="btn btn-primary">View Dashboard <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="info-image">
+          <img src="assets/images/img24.png" alt="Dashboard Preview" style="width:100%; display:block;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Coordinator Capabilities -->
+  <section class="section section-bg">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Seamless Management</h2>
+        <p class="section-subtitle">Our internal dashboard empowers coordinators to handle operations efficiently.</p>
+      </div>
+      
+      <div class="grid-4">
+        <div class="card">
+          <div class="card-img-wrap">
+            <img src="assets/images/img27.png" alt="Tutor Assignments" class="card-img">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Tutor Assignments</h3>
+            <p class="card-text">Match students with the best-fit tutors based on subjects and availability.</p>
+            <div class="card-footer" style="justify-content: center;">
+              <a href="dashboard.html" class="btn btn-outline">View Details</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-img-wrap">
+            <img src="assets/images/img22.png" alt="Session Logs" class="card-img">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Session Logs</h3>
+            <p class="card-text">Progress ongoing tuition assignments, hours, and collect feedback easily.</p>
+            <div class="card-footer" style="justify-content: center;">
+              <a href="dashboard.html" class="btn btn-outline">View Details</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img-wrap">
+            <img src="assets/images/img28.png" alt="Billing Management" class="card-img">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Billing Management</h3>
+            <p class="card-text">Manage parent invoices and automate tutor payouts reliably.</p>
+            <div class="card-footer" style="justify-content: center;">
+              <a href="dashboard.html" class="btn btn-outline">View Details</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img-wrap">
+            <img src="assets/images/img17.png" alt="Progress Tracking" class="card-img">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Progress Tracking</h3>
+            <p class="card-text">Monitor student progress and generate academic reports.</p>
+            <div class="card-footer" style="justify-content: center;">
+              <a href="dashboard.html" class="btn btn-outline">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Become a Tutor -->
+  <section class="section">
+    <div class="container">
+      <div class="info-section" style="flex-direction: row-reverse;">
+        <div class="info-content">
+          <h2 class="section-title">Join Our Tutor Network</h2>
+          <p style="margin-top:1.5rem; margin-bottom:1rem; color:var(--text-light);">Are you an experienced educator? Join our agency to connect with motivated students and enjoy flexible scheduling and reliable payouts.</p>
+          <ul style="margin-bottom: 2rem; color:var(--text-light); padding-left: 1.5rem; list-style-type: disc;">
+            <li style="margin-bottom: 0.5rem;">Flexible working hours.</li>
+            <li style="margin-bottom: 0.5rem;">Guaranteed and reliable payouts.</li>
+            <li style="margin-bottom: 0.5rem;">Focus on teaching, we handle the admin.</li>
+          </ul>
+          <a href="contact.html" class="btn btn-outline">Apply Now</a>
+        </div>
+        <div class="info-image">
+          <img src="assets/images/img30.png" alt="Tutor Registration" style="width:100%; display:block;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Unique Design Section (CTA) -->
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="section-title" style="margin-bottom: 1.5rem;">Ready to Boost Academic Success?</h2>
+      <p style="max-width: 600px; margin: 0 auto 2rem; font-size: 1.125rem;">Book a free consultation today to discuss your child's educational needs and find the perfect tutor match.</p>
+      <a href="contact.html" class="btn btn-primary" style="font-size: 1.125rem; padding: 1rem 2rem;">Book Free Consultation</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <a href="index.html" class="logo" style="margin-bottom: 1rem; display: inline-flex;">
+            <i class="fas fa-graduation-cap"></i>
+            <span>EduTuition</span>
+          </a>
+          <p>Connecting students with verified expert tutors for personalized home tuition, managed seamlessly through our robust dashboard.</p>
+          <div class="social-links" style="margin-top: 1.5rem;">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-links-col">
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Find a Tutor</a></li>
+            <li><a href="dashboard.html">Coordinator Dashboard</a></li>
+            <li><a href="testimonials.html">Testimonials</a></li>
+            <li><a href="pricing.html">Tuition Fees</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links-col">
+          <h3 class="footer-title">Features</h3>
+          <ul class="footer-links">
+            <li><a href="services.html">Verified Tutors</a></li>
+            <li><a href="dashboard.html">Session Logs</a></li>
+            <li><a href="dashboard.html">Billing Management</a></li>
+            <li><a href="pricing.html">Tutor Payouts</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-contact">
+          <h3 class="footer-title">Contact Info</h3>
+          <ul class="footer-links">
+            <li><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> 123 Education Ave, Learning City, LC 12345</li>
+            <li><i class="fas fa-phone" style="margin-right: 10px;"></i> (555) 987-6543</li>
+            <li><i class="fas fa-envelope" style="margin-right: 10px;"></i> contact@edutuition.com</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 Home Tuition Management Agency. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
+

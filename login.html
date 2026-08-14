@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-level=1.0">
+  <title>Login | Home Tuition Management Agency</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .auth-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+    .auth-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-toggles">
+    <button class="theme-toggle" aria-label="Toggle Dark Mode">
+      <i class="fas fa-moon"></i>
+    </button>
+    <button class="rtl-toggle" aria-label="Toggle RTL">
+      <i class="fas fa-exchange-alt"></i>
+    </button>
+  </div>
+
+  <div class="auth-page">
+    <img src="assets/images/img1.png" alt="Background" class="auth-bg">
+    <div class="auth-overlay"></div>
+
+    <div class="auth-card">
+      <div class="text-center" style="margin-bottom: 2rem;">
+        <a href="index.html" class="logo" style="justify-content: center;">
+          <i class="fas fa-graduation-cap"></i>
+          <span>EduTuition</span>
+        </a>
+        <p style="color: var(--text-light); margin-top: 0.5rem;">Welcome back! Please enter your details.</p>
+      </div>
+      
+      <form id="loginForm">
+        <div class="form-group">
+          <label class="form-label">Login As</label>
+          <select class="form-control" id="loginRole" required style="background-color: var(--bg-surface); color: var(--text-dark); border: 1px solid var(--border);">
+            <option value="parent-dashboard.html">Parent</option>
+            <option value="tutor-dashboard.html">Tutor</option>
+            <option value="dashboard.html">Coordinator</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div class="password-wrapper">
+            <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+            <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+          </div>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; font-size: 0.875rem;">
+          <label style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-light); cursor: pointer;">
+            <input type="checkbox"> Remember me
+          </label>
+          <a href="#" style="color: var(--primary); font-weight: 500;">Forgot password?</a>
+        </div>
+        
+        <button type="submit" class="btn btn-primary auth-btn">Sign in</button>
+
+        <div class="social-auth-divider">
+          <hr>
+          <span>Or continue with</span>
+        </div>
+        
+        <div class="social-auth-group">
+          <button type="button" class="btn btn-social">
+            <i class="fab fa-google" style="color: #DB4437;"></i> Google
+          </button>
+          <button type="button" class="btn btn-social">
+            <i class="fab fa-apple" style="color: #000000;"></i> Apple
+          </button>
+        </div>
+      </form>
+      
+      <p class="text-center" style="margin-top: 2rem; color: var(--text-light); font-size: 0.875rem;">
+        Don't have an account? <a href="register.html" style="color: var(--primary); font-weight: 500;">Sign up</a>
+      </p>
+    </div>
+
+  <script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+
+    togglePassword.addEventListener('click', function (e) {
+      // toggle the type attribute
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+      // toggle the eye slash icon
+      this.classList.toggle('fa-eye-slash');
+    });
+
+    const loginForm = document.getElementById('loginForm');
+    if(loginForm) {
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const role = document.getElementById('loginRole').value;
+        window.location.href = role;
+      });
+    }
+  </script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

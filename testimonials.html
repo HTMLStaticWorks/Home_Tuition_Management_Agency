@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-level=1.0">
+  <title>Success Stories | Home Tuition Management Agency</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .page-header {
+      padding: 13rem 0 8rem;
+      background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('assets/images/img7.png') center/cover no-repeat;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .gallery-filters .btn {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+    
+    .gallery-card {
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    
+    .gallery-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .gallery-card-img-wrap {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+    
+    .gallery-card-img-wrap::after {
+      content: '\f00e';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      opacity: 0;
+      transition: var(--transition);
+    }
+    
+    .gallery-card:hover .gallery-card-img-wrap::after {
+      opacity: 0.85;
+    }
+    
+    .gallery-card:hover .card-img {
+      transform: level(1.05);
+    }
+    
+    .badge-level {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-dark);
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    @media (max-width: 576px) {
+      .gallery-filters {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        width: 100% !important;
+        max-width: 320px !important;
+        margin: 0 auto 3rem !important;
+        gap: 0.75rem !important;
+      }
+      .gallery-filters .btn {
+        width: 100% !important;
+        text-align: center !important;
+        display: block !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-graduation-cap"></i>
+        <span>EduTuition</span>
+      </a>
+      
+      <button class="mobile-toggle" aria-label="Toggle Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+
+            <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="home-2.html" class="nav-link">Home 2</a></li>
+        <li><a href="about.html" class="nav-link">About Tutors</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="testimonials.html" class="nav-link active">Testimonials</a></li>
+        <li><a href="pricing.html" class="nav-link">Tuition Fees</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        
+        <li class="nav-actions">
+          <button class="theme-toggle" aria-label="Toggle Dark Mode">
+            <i class="fas fa-moon"></i>
+          </button>
+          <button class="rtl-toggle" aria-label="Toggle RTL">
+            <i class="fas fa-exchange-alt"></i>
+          </button>
+          <div class="nav-dropdown" style="position: relative; display: flex; align-items: center;">
+            <button class="cart-toggle dropdown-btn" aria-label="Portals">
+              <i class="fas fa-th-large"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="parent-dashboard.html"><i class="fas fa-user-graduate"></i> Parent Portal</a>
+              <a href="tutor-dashboard.html"><i class="fas fa-chalkboard-teacher"></i> Tutor Portal</a>
+              <a href="dashboard.html"><i class="fas fa-cog"></i> Coordinator Admin</a>
+            </div>
+          </div>
+          <a href="login.html" class="btn btn-primary">Login</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="container">
+      <h1 class="hero-title" style="color: #ffffff;">Student Success Stories</h1>
+      <p class="section-subtitle" style="color: #e2e8f0;">Read about the incredible achievements and academic growth of our students.</p>
+    </div>
+  </header>
+
+  <!-- Section 1: Success Stories Grid -->
+  <section class="section">
+    <div class="container">
+      
+      <!-- Filter Bar -->
+      <div class="gallery-filters" style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 3.5rem; flex-wrap: wrap;">
+        <button class="btn btn-primary filter-btn active" data-filter="all">All Stories</button>
+        <button class="btn btn-outline filter-btn" data-filter="high-school">High School</button>
+        <button class="btn btn-outline filter-btn" data-filter="college-prep">College Prep</button>
+        <button class="btn btn-outline filter-btn" data-filter="languages">Languages</button>
+      </div>
+
+      <!-- Even 8-Card Grid -->
+      <div class="grid-4" id="gallery-grid">
+        
+        <!-- Card 1 -->
+        <div class="card gallery-card gallery-item" data-filter="college-prep">
+          <div class="gallery-card-img-wrap">
+            <img src="assets/images/img21.png" alt="College Admissions" class="card-img">
+          </div>
+          <div class="card-body">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span style="color: var(--primary); font-size: 0.8rem; font-weight: 600; text-transform: uppercase;">College Prep</span>
+            </div>
+            <h3 class="card-title">Ivy League Admission</h3>
+            <p class="card-text">Sarah increased her SAT score by 300 points through our intensive math and reading curriculum.</p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card gallery-card gallery-item" data-filter="high-school">
+          <div class="gallery-card-img-wrap">
+            <img src="assets/images/img28.png" alt="Math Improvement" class="card-img">
+          </div>
+          <div class="card-body">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span style="color: var(--primary); font-size: 0.8rem; font-weight: 600; text-transform: uppercase;">High School</span>
+            </div>
+            <h3 class="card-title">From C to A+ in Calculus</h3>
+            <p class="card-text">David mastered advanced calculus concepts after just three months of personalized tutoring.</p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card gallery-card gallery-item" data-filter="high-school">
+          <div class="gallery-card-img-wrap">
+            <img src="assets/images/img29.png" alt="Physics Success" class="card-img">
+          </div>
+          <div class="card-body">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span style="color: var(--primary); font-size: 0.8rem; font-weight: 600; text-transform: uppercase;">High School</span>
+            </div>
+            <h3 class="card-title">Physics Mastery</h3>
+            <p class="card-text">Our engaging visual teaching methods helped Elena understand complex mechanics effortlessly.</p>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card gallery-card gallery-item" data-filter="languages">
+          <div class="gallery-card-img-wrap">
+            <img src="assets/images/img20.png" alt="Bilingual Success" class="card-img">
+          </div>
+          <div class="card-body">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span style="color: var(--primary); font-size: 0.8rem; font-weight: 600; text-transform: uppercase;">Languages</span>
+            </div>
+            <h3 class="card-title">Fluency in Spanish</h3>
+            <p class="card-text">Michael achieved conversational fluency in Spanish before his semester abroad.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Student Spotlight -->
+  <section class="section section-bg">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Student Spotlight</h2>
+        <p class="section-subtitle">Every month, we celebrate an outstanding student from our agency.</p>
+      </div>
+      
+      <div class="info-section" style="margin-top: 3.5rem;">
+        <div class="info-image">
+          <img src="assets/images/img19.png" alt="Student Spotlight" style="width:100%; border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
+        </div>
+        <div class="info-content">
+          <span style="color: var(--primary); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Spotlight of the Month</span>
+          <h2 class="section-title" style="margin-top: 0.5rem; margin-bottom: 1.5rem;">Emily's Journey to Stanford</h2>
+          <p style="color: var(--text-light); line-height: 1.7; margin-bottom: 1.5rem;">Emily worked closely with our expert coordinator team to structure a multi-year academic plan. Through targeted tutoring in AP Chemistry, AP Physics, and advanced Literature, she secured her dream admission to Stanford University.</p>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+            <div>
+              <strong style="color: var(--text-dark); display: block; margin-bottom: 0.25rem;">Program</strong>
+              <span style="color: var(--text-light); font-size: 0.95rem;">Premium Mentorship</span>
+            </div>
+            <div>
+              <strong style="color: var(--text-dark); display: block; margin-bottom: 0.25rem;">Key Subjects</strong>
+              <span style="color: var(--text-light); font-size: 0.95rem;">AP Sciences & English</span>
+            </div>
+            <div>
+              <strong style="color: var(--text-dark); display: block; margin-bottom: 0.25rem;">Duration</strong>
+              <span style="color: var(--text-light); font-size: 0.95rem;">3 Years of Tutoring</span>
+            </div>
+            <div>
+              <strong style="color: var(--text-dark); display: block; margin-bottom: 0.25rem;">Result</strong>
+              <span style="color: var(--text-light); font-size: 0.95rem;">Accepted to Stanford</span>
+            </div>
+          </div>
+          
+          <a href="contact.html" class="btn btn-primary">Book a Consultation</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Parent Reviews -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">What Parents Say</h2>
+        <p class="section-subtitle">Hear directly from the parents who have witnessed their children's growth.</p>
+      </div>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3.5rem;">
+        <div class="card" style="padding: 2.5rem; text-align: left;">
+          <i class="fas fa-quote-left" style="font-size: 2rem; color: var(--primary); margin-bottom: 1.5rem; display: block;"></i>
+          <p style="color: var(--text-light); font-style: italic; line-height: 1.8; margin-bottom: 1.5rem;">"The tutors at EduTuition not only helped my son pass his math exams, but they actually made him enjoy learning again. The coordinator was incredibly supportive throughout the process."</p>
+          <div>
+            <h4 style="color: var(--text-dark); margin-bottom: 0.25rem;">Amanda R.</h4>
+            <span style="color: var(--primary); font-size: 0.85rem; font-weight: 600;">Mother of an 8th Grader</span>
+          </div>
+        </div>
+        
+        <div class="card" style="padding: 2.5rem; text-align: left; background: var(--bg-surface); border: 2px solid var(--primary);">
+          <i class="fas fa-quote-left" style="font-size: 2rem; color: var(--primary); margin-bottom: 1.5rem; display: block;"></i>
+          <p style="color: var(--text-light); font-style: italic; line-height: 1.8; margin-bottom: 1.5rem;">"Finding a reliable French tutor used to be a nightmare. Thanks to the verified profiles on EduTuition, we found an amazing tutor within two days. Highly recommended!"</p>
+          <div>
+            <h4 style="color: var(--text-dark); margin-bottom: 0.25rem;">James T.</h4>
+            <span style="color: var(--primary); font-size: 0.85rem; font-weight: 600;">Father of a High School Junior</span>
+          </div>
+        </div>
+        
+        <div class="card" style="padding: 2.5rem; text-align: left;">
+          <i class="fas fa-quote-left" style="font-size: 2rem; color: var(--primary); margin-bottom: 1.5rem; display: block;"></i>
+          <p style="color: var(--text-light); font-style: italic; line-height: 1.8; margin-bottom: 1.5rem;">"The dashboard feature is a game-changer. I can track exactly what was covered in each session and handle billing without any awkward conversations. Everything is transparent."</p>
+          <div>
+            <h4 style="color: var(--text-dark); margin-bottom: 0.25rem;">Elena M.</h4>
+            <span style="color: var(--primary); font-size: 0.85rem; font-weight: 600;">Mother of two</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Call to Action -->
+  <section class="cta-section" style="background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('assets/images/img7.png') center/cover no-repeat;">
+    <div class="container">
+      <h2 class="section-title" style="margin-bottom: 1.5rem; color: #fff;">Start Your Academic Journey Today</h2>
+      <p style="max-width: 600px; margin: 0 auto 2.5rem; font-size: 1.15rem; color: #ccc;">Join hundreds of successful students who have achieved their academic goals with EduTuition's verified expert tutors.</p>
+      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+        <a href="register.html" class="btn btn-primary" style="font-size: 1.125rem; padding: 1rem 2rem;">Sign Up Now</a>
+        <a href="services.html" class="btn btn-outline btn-cta-outline" style="font-size: 1.125rem; padding: 1rem 2rem;">Explore Subjects</a>
+      </div>
+    </div>
+  </section>
+
+    <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <a href="index.html" class="logo" style="margin-bottom: 1rem; display: inline-flex;">
+            <i class="fas fa-graduation-cap"></i>
+            <span>EduTuition</span>
+          </a>
+          <p>Connecting students with verified expert tutors for personalized home tuition, managed seamlessly through our robust dashboard.</p>
+          <div class="social-links" style="margin-top: 1.5rem;">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-links-col">
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Find a Tutor</a></li>
+            <li><a href="dashboard.html">Coordinator Dashboard</a></li>
+            <li><a href="testimonials.html">Testimonials</a></li>
+            <li><a href="pricing.html">Tuition Fees</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links-col">
+          <h3 class="footer-title">Features</h3>
+          <ul class="footer-links">
+            <li><a href="services.html">Verified Tutors</a></li>
+            <li><a href="dashboard.html">Session Logs</a></li>
+            <li><a href="dashboard.html">Billing Management</a></li>
+            <li><a href="pricing.html">Tutor Payouts</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-contact">
+          <h3 class="footer-title">Contact Info</h3>
+          <ul class="footer-links">
+            <li><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> 123 Education Ave, Learning City, LC 12345</li>
+            <li><i class="fas fa-phone" style="margin-right: 10px;"></i> (555) 987-6543</li>
+            <li><i class="fas fa-envelope" style="margin-right: 10px;"></i> contact@edutuition.com</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 Home Tuition Management Agency. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox-modal" style="display: none; position: fixed; z-index: 10000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); justify-content: center; align-items: center; cursor: pointer; padding: 20px;">
+    <span class="close-lightbox" style="position: absolute; top: 20px; right: 30px; color: #fff; font-size: 3.5rem; cursor: pointer; transition: 0.2s;">&times;</span>
+    <img id="lightbox-img" src="" alt="Enlarged view" style="max-width: 90%; max-height: 80%; object-fit: contain; border-radius: var(--radius-md); box-shadow: 0 10px 40px rgba(0,0,0,0.8);">
+    <div id="lightbox-caption" style="position: absolute; bottom: 40px; color: #fff; font-size: 1.35rem; font-family: var(--font-heading); text-align: center; width: 100%; padding: 0 20px; font-weight: 500;">Caption</div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const galleryItems = document.querySelectorAll('.gallery-item');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxCaption = document.getElementById('lightbox-caption');
+      const closeLightbox = document.querySelector('.close-lightbox');
+
+      // Filtering Logic
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterButtons.forEach(b => {
+            b.classList.remove('btn-primary');
+            b.classList.add('btn-outline');
+            b.classList.remove('active');
+          });
+          btn.classList.add('btn-primary');
+          btn.classList.remove('btn-outline');
+          btn.classList.add('active');
+
+          const filterValue = btn.getAttribute('data-filter');
+          galleryItems.forEach(item => {
+            if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+              item.style.display = 'block';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // Lightbox Trigger
+      document.querySelectorAll('.gallery-card-img-wrap').forEach(wrap => {
+        wrap.addEventListener('click', (e) => {
+          const img = wrap.querySelector('img');
+          const title = wrap.closest('.card').querySelector('.card-title').textContent;
+          lightboxImg.src = img.src;
+          lightboxCaption.textContent = title;
+          lightbox.style.display = 'flex';
+        });
+      });
+
+      // Close Lightbox
+      lightbox.addEventListener('click', () => {
+        lightbox.style.display = 'none';
+      });
+      closeLightbox.addEventListener('click', () => {
+        lightbox.style.display = 'none';
+      });
+    });
+  </script>
+</body>
+</html>
+

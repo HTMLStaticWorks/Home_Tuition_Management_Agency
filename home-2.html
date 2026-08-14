@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-level=1.0">
+  <title>Home 2 | Home Tuition Management Agency</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .hero-premium {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .hero-premium .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .hero-premium .hero-title {
+      font-size: 5rem;
+      letter-spacing: -1px;
+    }
+    .hero-premium .hero-actions {
+      justify-content: center;
+    }
+
+    /* Horizontal Roadmap Timeline */
+    .timeline-container {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin-top: 4rem;
+      gap: 2rem;
+    }
+    
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: var(--border);
+      z-index: 1;
+    }
+    
+    .timeline-step {
+      flex: 1;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .timeline-node {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: var(--bg-surface);
+      border: 4px solid var(--border);
+      color: var(--text-dark);
+      font-size: 1.5rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .timeline-step:hover .timeline-node {
+      background-color: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+      transform: level(1.1);
+      box-shadow: 0 0 20px rgba(211, 47, 47, 0.4);
+    }
+    
+    .timeline-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.75rem;
+    }
+    
+    .timeline-desc {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+    
+    /* Alternating Split Showcase */
+    .split-row {
+      display: flex;
+      align-items: center;
+      gap: 5rem;
+      margin-bottom: 6rem;
+    }
+    
+    .split-row:last-child {
+      margin-bottom: 0;
+    }
+    
+    .split-row:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+    
+    .split-text {
+      flex: 1.1;
+    }
+    
+    .split-img-wrap {
+      flex: 0.9;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      transition: var(--transition);
+    }
+    
+    .split-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    
+    .split-img-wrap:hover img {
+      transform: level(1.05);
+    }
+    
+    .split-tag {
+      color: var(--primary);
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    
+    .split-title {
+      font-size: 2.25rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 1.25rem;
+    }
+    
+    .split-desc {
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+    }
+    
+    .split-features {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .split-features li {
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+    
+    .split-features li::before {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      color: var(--primary);
+      position: absolute;
+      left: 0;
+      top: 2px;
+    }
+    
+    /* Responsive timeline and split rows */
+    @media (max-width: 992px) {
+      .timeline-container {
+        flex-direction: column;
+        gap: 3rem;
+      }
+      .timeline-container::before {
+        display: none;
+      }
+      .split-row, .split-row:nth-child(even) {
+        flex-direction: column;
+        gap: 3rem;
+      }
+    }
+
+    /* 3D Exploded Study Plan Stack */
+    /* Interactive Tabs Section */
+    .interactive-tabs-section {
+      background-color: var(--bg-main);
+      padding: 6rem 0;
+      overflow: hidden;
+    }
+    
+    .tabs-container {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+      margin-top: 3rem;
+      align-items: center;
+    }
+    
+    .tabs-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .tab-btn {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+      padding: 1.5rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .tab-btn::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background: var(--primary);
+      transform: scaleY(0);
+      transition: transform 0.3s ease;
+      transform-origin: center;
+    }
+    
+    .tab-btn:hover {
+      border-color: var(--primary);
+      transform: translateX(5px);
+    }
+    
+    .tab-btn.active {
+      background: var(--bg-main);
+      border-color: var(--primary);
+      box-shadow: var(--shadow-md);
+      transform: translateX(10px);
+    }
+    
+    .tab-btn.active::before {
+      transform: scaleY(1);
+    }
+    
+    .tab-icon {
+      font-size: 1.75rem;
+      color: var(--text-light);
+      transition: color 0.3s ease;
+      margin-top: 0.25rem;
+    }
+    
+    .tab-btn.active .tab-icon {
+      color: var(--primary);
+    }
+    
+    .tab-text h4 {
+      font-size: 1.25rem;
+      margin-bottom: 0.25rem;
+      color: var(--text-dark);
+    }
+    
+    .tab-text p {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      margin: 0;
+    }
+    
+    .tabs-content-area {
+      position: relative;
+      min-height: 500px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      background: var(--bg-surface);
+    }
+    
+    .tab-pane {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.5s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .tab-pane.active {
+      opacity: 1;
+      visibility: visible;
+      position: relative;
+    }
+    
+    .tab-pane-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+    
+    .tab-pane-info {
+      padding: 2.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .tab-pane-info h3 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
+    
+    .tab-pane-info p {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+    
+    .tab-features-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .tab-features-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+    
+    .tab-features-list li i {
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+    
+    @media (max-width: 992px) {
+      .tabs-container {
+        grid-template-columns: 1fr;
+      }
+      .tab-btn.active {
+        transform: translateY(-5px) translateX(0);
+      }
+      .tab-btn:hover {
+        transform: translateY(-2px) translateX(0);
+      }
+      .tab-btn::before {
+        width: 100%;
+        height: 4px;
+        top: 0;
+        left: 0;
+        transform: scaleX(0);
+      }
+      .tab-btn.active::before {
+        transform: scaleX(1);
+      }
+    }
+
+    /* Bento Grid Section */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+    
+    .bento-cell {
+      background: var(--bg-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    
+    .bento-cell:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary-light);
+    }
+    
+    .bento-content {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    
+    .bento-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    
+    .bento-title {
+      font-size: 1.5rem;
+      color: var(--text-dark);
+      margin-bottom: 0.75rem;
+    }
+    
+    .bento-desc {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    
+    .bento-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      margin-top: auto;
+    }
+    
+    .bento-features li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-dark);
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .bento-features i {
+      color: var(--primary);
+    }
+    
+    .bento-icon {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+    
+    /* Specific Cells */
+    .bento-large {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    
+    .bento-large .bento-title {
+      font-size: 2rem;
+    }
+    
+    .bento-large .bento-img {
+      height: 250px;
+      background: var(--bg-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    
+    .bento-large .bento-img img {
+      max-height: 100%;
+      object-fit: contain;
+    }
+    
+    .bento-small {
+      grid-column: span 1;
+    }
+    
+    .bento-dark {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary-dark);
+    }
+    
+    .bento-dark .bento-title, 
+    .bento-dark .bento-desc {
+      color: white;
+    }
+    
+    .bento-dark .bento-icon {
+      color: white;
+      opacity: 0.9;
+    }
+    
+    .bento-wide {
+      grid-column: span 3;
+    }
+    
+    .bento-content-horizontal {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0;
+    }
+    
+    .bento-text-side {
+      padding: 2.5rem;
+      flex: 1;
+    }
+    
+    .bento-img-side {
+      flex: 1;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-main);
+      border-left: 1px solid var(--border);
+    }
+    
+    .bento-img-side img {
+      max-height: 80%;
+      object-fit: contain;
+    }
+    
+    @media (max-width: 992px) {
+      .bento-grid {
+        grid-template-columns: 1fr;
+      }
+      .bento-large, .bento-small, .bento-wide {
+        grid-column: span 1;
+        grid-row: auto;
+      }
+      .bento-content-horizontal {
+        flex-direction: column;
+      }
+      .bento-img-side {
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid var(--border);
+      }
+    }
+  </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-graduation-cap"></i>
+        <span>EduTuition</span>
+      </a>
+      
+      <button class="mobile-toggle" aria-label="Toggle Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+
+            <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="home-2.html" class="nav-link active">Home 2</a></li>
+        <li><a href="about.html" class="nav-link">About Tutors</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+        <li><a href="pricing.html" class="nav-link">Tuition Fees</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        
+        <li class="nav-actions">
+          <button class="theme-toggle" aria-label="Toggle Dark Mode">
+            <i class="fas fa-moon"></i>
+          </button>
+          <button class="rtl-toggle" aria-label="Toggle RTL">
+            <i class="fas fa-exchange-alt"></i>
+          </button>
+          <div class="nav-dropdown" style="position: relative; display: flex; align-items: center;">
+            <button class="cart-toggle dropdown-btn" aria-label="Portals">
+              <i class="fas fa-th-large"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="parent-dashboard.html"><i class="fas fa-user-graduate"></i> Parent Portal</a>
+              <a href="tutor-dashboard.html"><i class="fas fa-chalkboard-teacher"></i> Tutor Portal</a>
+              <a href="dashboard.html"><i class="fas fa-cog"></i> Coordinator Admin</a>
+            </div>
+          </div>
+          <a href="login.html" class="btn btn-primary">Login</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero hero-premium">
+    <img src="assets/images/img2.png" alt="Home Tuition Premium Hero" class="hero-bg">
+    <div class="hero-overlay" style="background: rgba(0,0,0,0.6);"></div>
+    <div class="container" style="display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: wrap; z-index: 1; position: relative;">
+      <div class="hero-content" style="text-align: center; max-width: 800px; flex: 1; min-width: 300px; margin: 0 auto;">
+        <h1 class="hero-title" style="text-align: center; font-size: 3.5rem;">Seamless Home Tuition Management</h1>
+        <p class="hero-desc">Connecting ambitious students with top-tier verified educators, powered by an advanced internal dashboard for coordinators to ensure complete transparency.</p>
+        <div class="hero-actions" style="justify-content: center;">
+          <a href="services.html" class="btn btn-primary">Find a Tutor</a>
+          <a href="dashboard.html" class="btn btn-outline" style="color:#fff; border-color:#fff;">Coordinator Login</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: The Public Tutor Directory (Grid 6) -->
+  <section id="directory" class="section">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Expert Tutors Across All Disciplines</h2>
+        <p class="section-subtitle">Browse our public directory of highly qualified and verified home educators.</p>
+      </div>
+      
+      <div class="grid-6">
+        <div class="card">
+          <div class="card-img-wrap"><img src="assets/images/img28.png" alt="Mathematics" class="card-img"></div>
+          <div class="card-body text-center">
+            <h3 class="card-title">Advanced Mathematics</h3>
+            <div class="card-footer"><a href="services.html" class="btn btn-outline" style="width:100%">View Tutors</a></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img-wrap"><img src="assets/images/img31.png" alt="Science & Engineering" class="card-img"></div>
+          <div class="card-body text-center">
+            <h3 class="card-title">Science & Engineering</h3>
+            <div class="card-footer"><a href="services.html" class="btn btn-outline" style="width:100%">View Tutors</a></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img-wrap"><img src="assets/images/img22.png" alt="Language Arts" class="card-img"></div>
+          <div class="card-body text-center">
+            <h3 class="card-title">Language Arts</h3>
+            <div class="card-footer"><a href="services.html" class="btn btn-outline" style="width:100%">View Tutors</a></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img-wrap"><img src="assets/images/img24.png" alt="Test Preparation" class="card-img"></div>
+          <div class="card-body text-center">
+            <h3 class="card-title">Test Preparation (SAT/ACT)</h3>
+            <div class="card-footer"><a href="services.html" class="btn btn-outline" style="width:100%">View Tutors</a></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img-wrap"><img src="assets/images/img25.png" alt="Foreign Languages" class="card-img"></div>
+          <div class="card-body text-center">
+            <h3 class="card-title">Foreign Languages</h3>
+            <div class="card-footer"><a href="services.html" class="btn btn-outline" style="width:100%">View Tutors</a></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img-wrap"><img src="assets/images/img23.png" alt="Computer Science" class="card-img"></div>
+          <div class="card-body text-center">
+            <h3 class="card-title">Computer Science</h3>
+            <div class="card-footer"><a href="services.html" class="btn btn-outline" style="width:100%">View Tutors</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- Section 3: Coordinator Dashboard & Operations -->
+  <section class="section">
+    <div class="container">
+      <div class="info-section">
+        <div class="info-image">
+          <img src="assets/images/img17.png" alt="Coordinator Dashboard" style="width:100%; display:block;">
+        </div>
+        <div class="info-content">
+          <h2 class="section-title">Powerful Internal Dashboard</h2>
+          <p style="margin-top:1.5rem; margin-bottom:1rem; color:var(--text-light);">Managing multiple tutors and students requires robust tools. Our internal dashboard empowers coordinators to efficiently handle assignments, track session logs, and process billingâ€”all from one centralized hub.</p>
+          <ul style="margin-bottom: 2rem; color:var(--text-light); padding-left: 1.5rem; list-style-type: disc;">
+            <li style="margin-bottom: 0.5rem;">Intelligent Tutor Assignments & Matching.</li>
+            <li style="margin-bottom: 0.5rem;">Real-time Session Logs & Progress Tracking.</li>
+            <li style="margin-bottom: 0.5rem;">Automated Parent Billing & Tutor Payouts.</li>
+          </ul>
+          <a href="dashboard.html" class="btn btn-primary">Explore Dashboard</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Ecosystem Features (Grid 4) -->
+  <section class="section section-bg">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">A Complete Educational Ecosystem</h2>
+        <p class="section-subtitle">Everything you need to succeed, all in one place.</p>
+      </div>
+      
+      <div class="grid-4">
+        <div class="card">
+          <div class="card-img-wrap"><img src="assets/images/img26.png" alt="Verified Profiles" class="card-img"></div>
+          <div class="card-body">
+            <h3 class="card-title">Verified Profiles</h3>
+            <p class="card-text">Publicly accessible tutor credentials and reviews.</p>
+            <div class="card-footer"><button class="btn btn-outline" style="width:100%">Learn More</button></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img-wrap"><img src="assets/images/img27.png" alt="Session Logging" class="card-img"></div>
+          <div class="card-body">
+            <h3 class="card-title">Session Logging</h3>
+            <p class="card-text">Detailed hourly tracking across multiple students.</p>
+            <div class="card-footer"><button class="btn btn-outline" style="width:100%">Learn More</button></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img-wrap"><img src="assets/images/img22.png" alt="Financial Management" class="card-img"></div>
+          <div class="card-body">
+            <h3 class="card-title">Financial Management</h3>
+            <p class="card-text">Streamlined parent billing and secure payments.</p>
+            <div class="card-footer"><button class="btn btn-outline" style="width:100%">Learn More</button></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img-wrap"><img src="assets/images/img23.png" alt="Performance Analytics" class="card-img"></div>
+          <div class="card-body">
+            <h3 class="card-title">Performance Analytics</h3>
+            <p class="card-text">Centralized data insights for coordinators.</p>
+            <div class="card-footer"><button class="btn btn-outline" style="width:100%">Learn More</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: How the Ecosystem Works (Timeline) -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">How Our Ecosystem Works</h2>
+        <p class="section-subtitle">A seamless process from matching to academic success.</p>
+      </div>
+      
+      <div class="timeline-container">
+        <!-- Step 1 -->
+        <div class="timeline-step">
+          <div class="timeline-node">01</div>
+          <h3 class="timeline-title">Student Request</h3>
+          <p class="timeline-desc">Parents submit requirements for subjects, schedule preferences, and academic goals.</p>
+        </div>
+        
+        <!-- Step 2 -->
+        <div class="timeline-step">
+          <div class="timeline-node">02</div>
+          <h3 class="timeline-title">Coordinator Matching</h3>
+          <p class="timeline-desc">Our internal coordinators leverage the dashboard to assign the perfect verified tutor.</p>
+        </div>
+        
+        <!-- Step 3 -->
+        <div class="timeline-step">
+          <div class="timeline-node">03</div>
+          <h3 class="timeline-title">Session Logging</h3>
+          <p class="timeline-desc">Tutors log hours and progress reports, giving parents complete visibility into performance.</p>
+        </div>
+        
+        <!-- Step 4 -->
+        <div class="timeline-step">
+          <div class="timeline-node">04</div>
+          <h3 class="timeline-title">Automated Billing</h3>
+          <p class="timeline-desc">Invoices are automatically generated and tutor payouts are processed securely every cycle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: The Performance Hub (Bento Box Grid) -->
+  <section class="section section-bg">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">The Performance Hub</h2>
+        <p class="section-subtitle">Exquisite tools crafted to elevate your operational efficiency.</p>
+      </div>
+      
+      <div class="bento-grid">
+        <!-- Main Large Cell -->
+        <div class="bento-cell bento-large">
+          <div class="bento-content">
+            <span class="bento-tag">Coordinator Tools</span>
+            <h3 class="bento-title">Advanced Dashboard Automation</h3>
+            <p class="bento-desc">Manage hundreds of students simultaneously without manual paperwork. Orchestrate an entire tuition empire seamlessly.</p>
+            <ul class="bento-features">
+              <li><i class="fas fa-check-circle"></i> Real-time tutor availability sensors</li>
+              <li><i class="fas fa-check-circle"></i> Automated matching algorithms</li>
+              <li><i class="fas fa-check-circle"></i> Centralized communication hub</li>
+            </ul>
+          </div>
+          <div class="bento-img">
+            <img src="assets/images/img32.png" alt="Advanced Dashboard">
+          </div>
+        </div>
+
+        <!-- Top Right Small Cell -->
+        <div class="bento-cell bento-small bento-dark">
+          <div class="bento-content">
+            <div class="bento-icon"><i class="fas fa-shield-alt"></i></div>
+            <h3 class="bento-title">Elite Tutor Verification</h3>
+            <p class="bento-desc">Rigorous 5-step vetting process. We verify degrees and conduct live teaching trials.</p>
+          </div>
+        </div>
+
+        <!-- Bottom Right Small Cell -->
+        <div class="bento-cell bento-small">
+          <div class="bento-content">
+            <div class="bento-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <h3 class="bento-title">Real-Time Tracking</h3>
+            <p class="bento-desc">Live session GPS tracking ensures tutor punctuality and student safety.</p>
+          </div>
+        </div>
+
+        <!-- Bottom Wide Cell -->
+        <div class="bento-cell bento-wide">
+          <div class="bento-content-horizontal">
+            <div class="bento-text-side">
+              <span class="bento-tag">Financial</span>
+              <h3 class="bento-title">Bulk Invoicing & Reporting</h3>
+              <p class="bento-desc">Generate one-click invoices and manage payrolls securely every cycle.</p>
+            </div>
+            <div class="bento-img-side">
+              <img src="assets/images/img33.png" alt="Invoicing">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Tailored Experiences (Interactive Tabs) -->
+  <section class="interactive-tabs-section section">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Tailored Experiences</h2>
+        <p class="section-subtitle">A seamless platform built for every stakeholder.</p>
+      </div>
+
+      <div class="tabs-container">
+        <!-- Tab Buttons (Left) -->
+        <div class="tabs-nav">
+          <button class="tab-btn active" data-target="tab-students">
+            <div class="tab-icon"><i class="fas fa-user-graduate"></i></div>
+            <div class="tab-text">
+              <h4>For Students & Parents</h4>
+              <p>Find the perfect tutor and track your progress easily.</p>
+            </div>
+          </button>
+          
+          <button class="tab-btn" data-target="tab-coordinators">
+            <div class="tab-icon"><i class="fas fa-briefcase"></i></div>
+            <div class="tab-text">
+              <h4>For Agency Coordinators</h4>
+              <p>Manage assignments, session logs, and invoicing efficiently.</p>
+            </div>
+          </button>
+          
+          <button class="tab-btn" data-target="tab-tutors">
+            <div class="tab-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+            <div class="tab-text">
+              <h4>For Expert Tutors</h4>
+              <p>Focus on teaching while we handle the scheduling and payouts.</p>
+            </div>
+          </button>
+        </div>
+
+        <!-- Tab Content (Right) -->
+        <div class="tabs-content-area">
+          <!-- Student Tab -->
+          <div class="tab-pane active" id="tab-students">
+            <img src="assets/images/img17.png" alt="Students and Parents" class="tab-pane-img">
+            <div class="tab-pane-info">
+              <h3>Empowering Your Academic Journey</h3>
+              <p>Browse through hundreds of verified educator profiles. Filter by subject, budget, and location to find your perfect match. Our risk-free guarantee ensures you love your first session.</p>
+              <ul class="tab-features-list">
+                <li><i class="fas fa-check-circle"></i> Vetted educator profiles with real reviews</li>
+                <li><i class="fas fa-check-circle"></i> Easy online booking and secure payments</li>
+                <li><i class="fas fa-check-circle"></i> Weekly progress reports sent directly to you</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Coordinator Tab -->
+          <div class="tab-pane" id="tab-coordinators">
+            <img src="assets/images/img32.png" alt="Agency Coordinators" class="tab-pane-img">
+            <div class="tab-pane-info">
+              <h3>Total Control Over Operations</h3>
+              <p>Eliminate manual paperwork. Our sophisticated dashboard allows you to assign tutors, track ongoing sessions in real-time, and auto-generate invoices for hundreds of clients simultaneously.</p>
+              <ul class="tab-features-list">
+                <li><i class="fas fa-check-circle"></i> Centralized matching and assignment hub</li>
+                <li><i class="fas fa-check-circle"></i> Real-time tutor GPS and session tracking</li>
+                <li><i class="fas fa-check-circle"></i> Automated billing and payroll cycles</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Tutors Tab -->
+          <div class="tab-pane" id="tab-tutors">
+            <img src="assets/images/img33.png" alt="Expert Tutors" class="tab-pane-img">
+            <div class="tab-pane-info">
+              <h3>Focus on What You Do Best: Teaching</h3>
+              <p>Join our elite network of educators. We handle all the client acquisition, scheduling conflicts, and payment collections so you can focus entirely on delivering exceptional lessons.</p>
+              <ul class="tab-features-list">
+                <li><i class="fas fa-check-circle"></i> Flexible scheduling and automated reminders</li>
+                <li><i class="fas fa-check-circle"></i> Guaranteed on-time bi-weekly payouts</li>
+                <li><i class="fas fa-check-circle"></i> Access to premium teaching resources</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 8: Unique Design Section (CTA) -->
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="section-title" style="margin-bottom: 1.5rem;">Ready to Start Your Academic Journey?</h2>
+      <p style="max-width: 600px; margin: 0 auto 2rem; font-size: 1.125rem;">Join thousands of satisfied students who trust EduTuition for their learning needs.</p>
+      <div class="cta-actions" style="display: flex; justify-content: center; gap: 1rem;">
+        <a href="register.html" class="btn btn-primary" style="font-size: 1.125rem; padding: 1rem 2rem;">Create Account</a>
+        <a href="services.html" class="btn btn-outline btn-cta-outline" style="font-size: 1.125rem; padding: 1rem 2rem;">Find a Tutor</a>
+      </div>
+    </div>
+  </section>
+
+    <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <a href="index.html" class="logo" style="margin-bottom: 1rem; display: inline-flex;">
+            <i class="fas fa-graduation-cap"></i>
+            <span>EduTuition</span>
+          </a>
+          <p>Connecting students with verified expert tutors for personalized home tuition, managed seamlessly through our robust dashboard.</p>
+          <div class="social-links" style="margin-top: 1.5rem;">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-links-col">
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Find a Tutor</a></li>
+            <li><a href="dashboard.html">Coordinator Dashboard</a></li>
+            <li><a href="testimonials.html">Testimonials</a></li>
+            <li><a href="pricing.html">Tuition Fees</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links-col">
+          <h3 class="footer-title">Features</h3>
+          <ul class="footer-links">
+            <li><a href="services.html">Verified Tutors</a></li>
+            <li><a href="dashboard.html">Session Logs</a></li>
+            <li><a href="dashboard.html">Billing Management</a></li>
+            <li><a href="pricing.html">Tutor Payouts</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-contact">
+          <h3 class="footer-title">Contact Info</h3>
+          <ul class="footer-links">
+            <li><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> 123 Education Ave, Learning City, LC 12345</li>
+            <li><i class="fas fa-phone" style="margin-right: 10px;"></i> (555) 987-6543</li>
+            <li><i class="fas fa-envelope" style="margin-right: 10px;"></i> contact@edutuition.com</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 Home Tuition Management Agency. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-level=1.0">
+  <title>404 Not Found | Home Tuition Management Agency</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .error-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .error-content {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .error-img {
+      max-width: 400px;
+      margin: 0 auto 2rem;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .error-code {
+      font-size: 6rem;
+      font-weight: 600;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 1rem;
+      font-family: var(--font-heading);
+    }
+  </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-graduation-cap"></i>
+        <span>EduTuition</span>
+      </a>
+      
+      <button class="mobile-toggle" aria-label="Toggle Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+
+            <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="home-2.html" class="nav-link">Home 2</a></li>
+        <li><a href="about.html" class="nav-link">About Tutors</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+        <li><a href="pricing.html" class="nav-link">Tuition Fees</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        
+        <li class="nav-actions">
+          <button class="theme-toggle" aria-label="Toggle Dark Mode">
+            <i class="fas fa-moon"></i>
+          </button>
+          <button class="rtl-toggle" aria-label="Toggle RTL">
+            <i class="fas fa-exchange-alt"></i>
+          </button>
+          <a href="dashboard.html" class="cart-toggle" aria-label="Dashboard">
+            <i class="fas fa-th-large"></i>
+          </a>
+          <a href="login.html" class="btn btn-outline">Login</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="error-page" style="padding-top: 80px;">
+    <div class="error-content">
+      <div class="container">
+
+        <div class="error-code">404</div>
+        <h1 class="hero-title" style="color: var(--text-dark); margin-bottom: 1rem; font-size: 2.5rem;">Oops! Tutor
+          Derailed.</h1>
+        <p style="color: var(--text-light); font-size: 1.125rem; max-width: 500px; margin: 0 auto 2rem;">The page you
+          are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+        <a href="index.html" class="btn btn-primary"><i class="fas fa-home"></i> Back to Station (Home)</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>
