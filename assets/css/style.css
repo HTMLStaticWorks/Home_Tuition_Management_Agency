@@ -1384,22 +1384,32 @@ img {
 
 /* Custom Testimonials Grid to center the 3rd card on tablet */
 .testimonials-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
   gap: 2rem;
   margin-top: 3.5rem;
 }
 .testimonials-grid .card {
-  width: calc(33.333% - 1.34rem); /* 3 columns on desktop */
+  height: 100%;
 }
 @media (max-width: 1024px) {
-  .testimonials-grid .card {
-    width: calc(50% - 1rem); /* 2 columns on tablet */
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .testimonials-grid .card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - 1rem);
   }
 }
 @media (max-width: 650px) {
-  .testimonials-grid .card {
-    width: 100%; /* 1 column on mobile */
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+  .testimonials-grid .card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    width: 100%;
   }
 }
